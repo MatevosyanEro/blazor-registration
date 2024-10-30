@@ -1,0 +1,128 @@
+﻿@page "/signup"
+@using System.Text.Json;
+@inject NavigationManager Navigation
+@using System.ComponentModel.DataAnnotations
+@using Reg.Components.Pages;
+@inject IUserService UserService
+@rendermode InteractiveServer
+@using System.Net
+<PageTitle>Sign Up</PageTitle>
+<div class="body">
+	<form action="/" method="post">
+
+		<div class="sign_in" style="left:@($"{move_px}px");">
+			<div class="side">
+
+			</div>
+			<EditForm Model="@userSignIn" OnValidSubmit="HandleValidSubmit_signIn">
+				<DataAnnotationsValidator />
+				<div class="sign_in_form">
+				<p>войдите в аккаунт</p>
+				<input class="signin_email" type="email" placeholder="Эл почта" @bind-value = "userSignIn.Email" />
+				<ValidationMessage For=@(() => userSignIn.Email) />
+
+				<input class="signin_password" type="password" placeholder="Пароль" @bind-value = "userSignIn.Password"/>
+				<ValidationMessage For=@(() => userSignIn.Password) />
+
+
+				<button type="submit" class="signin_btn">войти</button>
+				<span >у вас ещё нет аккаунта?</span>
+				<button type="button" class="backto_signup_btn" @onclick=Move >зарегистрироваться</button>
+				</div>
+			</EditForm>
+		</div>
+
+
+		
+		<EditForm Model="@user" class="sign_up" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit" >
+			<DataAnnotationsValidator />
+			<p>Регистрация</p>
+			<input type="text" placeholder="Имя" @bind-value = "user.Name" />
+		
+
+			<input type="text" placeholder="Фамилия" @bind-value="user.Surname" />
+			
+
+			<input type="email" placeholder="Эл почта" @bind-value="user.Email" />
+			
+
+			<input type="password" placeholder="Пароль" @bind-value="user.Password" />
+			
+
+			<input type="password" placeholder="Повторить пароль" @bind-value = "confirmed_password" />
+			@if(firstError != "")
+			{
+				<p style="font-size:20px;color: red;">@firstError</p>
+			}
+
+			<button type="submit" class="signup_btn" @onclick=Register>зарегистрироваться</button>
+			<span>У вас уже есть аккаунт?</span>
+			<button type="button" class="gotosignin_btn" @onclick="Move">войти</button>
+		</EditForm>
+		
+	</form>
+
+</div>
+
+@code {
+
+	private int move_px = 570;
+	private SignIn userSignIn = new SignIn();
+	private User user = new User();
+	private string firstError = "";
+	private string confirmed_password;
+
+	private async Task Register()
+	{
+		if (confirmed_password == user.Password)
+		{
+			int Process = await UserService.AddUserAsync(user);
+			if (Process == (int)HttpStatusCode.OK)
+			{
+				Navigation.NavigateTo("/");
+			}
+		}
+		else firstError = "passwords doesn't confirm";
+
+	}
+
+	private void HandleValidSubmit()
+	{
+		Console.WriteLine(JsonSerializer.Serialize(user));
+	}
+
+	private void HandleValidSubmit_signIn()
+	{
+		Console.WriteLine("password is"+userSignIn.Password+ "email is" + userSignIn.Email);
+	}
+
+
+	private void HandleInvalidSubmit()
+	{
+		var validationResults = new List<ValidationResult>();
+		var context = new ValidationContext(user);
+		bool isValid = Validator.TryValidateObject(user, context, validationResults, true);
+		foreach(var val in validationResults)
+		{
+			if(val.ErrorMessage != null)
+			{
+				firstError = val.ErrorMessage;
+				break;
+			}
+		}
+	}
+
+
+	public void Move()
+	{
+		if (move_px == 570)
+		{
+			move_px = 0;
+		}
+		else
+		{
+			move_px = 570;
+		}
+	}
+
+}

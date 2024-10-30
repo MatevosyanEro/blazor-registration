@@ -1,0 +1,7 @@
+C:\Users\matev\Desktop\blazor\Reg\Reg\obj\Release\net8.0\PubTmp\Out\Reg.exe
+C:\Users\matev\Desktop\blazor\Reg\Reg\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
+C:\Users\matev\Desktop\blazor\Reg\Reg\obj\Release\net8.0\PubTmp\Out\appsettings.json
+C:\Users\matev\Desktop\blazor\Reg\Reg\obj\Release\net8.0\PubTmp\Out\Reg.dll
+C:\Users\matev\Desktop\blazor\Reg\Reg\obj\Release\net8.0\PubTmp\Out\Reg.deps.json
+C:\Users\matev\Desktop\blazor\Reg\Reg\obj\Release\net8.0\PubTmp\Out\Reg.runtimeconfig.json
+C:\Users\matev\Desktop\blazor\Reg\Reg\obj\Release\net8.0\PubTmp\Out\Reg.pdb

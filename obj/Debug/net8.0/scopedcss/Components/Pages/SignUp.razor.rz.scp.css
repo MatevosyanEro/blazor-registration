@@ -1,0 +1,132 @@
+*[b-oepv6sijka] {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.body[b-oepv6sijka] {
+    margin-top:0px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-image: url('https://img.freepik.com/free-photo/view-arrangement-with-keyboard-notebooks_23-2148847749.jpg?w=1380&t=st=1728461166~exp=1728461766~hmac=f2b8ce9da3498fe80a1f97f9298994abd2cb34ca1831e53cfca0f5e0655c162c');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    padding-right: 50px;
+}
+
+form[b-oepv6sijka] {
+    width: 600px;
+    height: 650px;
+    padding: 20px;
+    border-radius: 10px;
+    background: none;
+    backdrop-filter: blur(2px); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 6px 6px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    text-align: center;
+    display: flex;
+    overflow:hidden;
+}
+
+.sign_up>p[b-oepv6sijka]{
+    font-size:50px;
+}
+input[b-oepv6sijka]{
+    display:block;
+    margin-top:15px;
+    width:500px;
+    height:10%;
+    border-radius:10px;
+    padding-left:20px;
+    font-size:20px;
+}
+button[b-oepv6sijka]{
+    margin-top:15px;
+
+}
+/*.sign_up{
+    z-index:2;
+}*/
+.signup_btn[b-oepv6sijka] {
+    display: block;
+    width: 250px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: #0ba704;
+    border:none;
+    border-radius:20px;
+    color:aliceblue;
+    height:50px;
+    font-size:20px;
+    letter-spacing:1px;
+}
+.gotosignin_btn[b-oepv6sijka]{
+    margin-left:10px;
+    width:70px;
+    height:40px;
+    border-radius:15px;
+    border:2px solid darkblue;
+    color:darkblue;
+}
+.sign_in[b-oepv6sijka]{
+    bottom:0px;
+   width:600px;
+   height:650px;
+/*   background-color:black;*/
+   position:absolute;
+   left:553px;
+   display:flex;
+   z-index:1;
+   transition: 1.5s ease;
+}
+.side[b-oepv6sijka] {
+    height: 100%;
+    width: 50px;
+    background-color:#316fa3
+}
+.sign_in_form[b-oepv6sijka]{
+    height:100%;
+    width:550px;
+    background-color:#1e70ae;
+    padding-top:50px;
+}
+.backto_signup_btn[b-oepv6sijka] {
+    width: 170px;
+    height: 34px;
+    border: 1px solid darkcyan;
+    border-radius: 15px;
+    transition: 0.7s ease;
+}
+.backto_signup_btn:hover[b-oepv6sijka]{
+    background-color:#acb0f0;
+    border:none;
+    transform:scale(1.05);
+}
+.signin_btn[b-oepv6sijka]{
+    display: block;
+    width: 150px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: #0ba704;
+    border: none;
+    border-radius: 20px;
+    color: aliceblue;
+    height: 50px;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+.sign_in_form>span[b-oepv6sijka]{
+    word-spacing:2px;
+ }
+.sign_in_form>p[b-oepv6sijka]{
+    font-size:50px;
+}
+.signin_email[b-oepv6sijka],.signin_password[b-oepv6sijka]{
+    width:400px;
+    margin:0 auto;
+    margin-top:25px;    
+}
