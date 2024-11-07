@@ -18,48 +18,39 @@
 				<DataAnnotationsValidator />
 				<div class="sign_in_form">
 				<p>войдите в аккаунт</p>
-				<input class="signin_email" type="email" placeholder="Эл почта" @bind-value = "userSignIn.Email" />
-				<ValidationMessage For=@(() => userSignIn.Email) />
-
-				<input class="signin_password" type="password" placeholder="Пароль" @bind-value = "userSignIn.Password"/>
-				<ValidationMessage For=@(() => userSignIn.Password) />
-
-
-				<button type="submit" class="signin_btn">войти</button>
+				<input class="signin_email" type="email" placeholder="Эл почта" @bind-value = "signin_email" />
+				<input class="signin_password" type="password" placeholder="Пароль" @bind-value = "signin_password"/>
+					@if(signin_error!= "")
+					{
+						<p style="font-size:15px;color:red;font-weight:700;margin-top:20px">@signin_error</p>
+					}
+				<button type="submit" class="signin_btn" @onclick=enter>войти</button>
 				<span >у вас ещё нет аккаунта?</span>
 				<button type="button" class="backto_signup_btn" @onclick=Move >зарегистрироваться</button>
 				</div>
 			</EditForm>
 		</div>
-
-
 		
 		<EditForm Model="@user" class="sign_up" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit" >
 			<DataAnnotationsValidator />
 			<p>Регистрация</p>
 			<input type="text" placeholder="Имя" @bind-value = "user.Name" />
 		
-
-			<input type="text" placeholder="Фамилия" @bind-value="user.Surname" />
-			
+			<input type="text" placeholder="Фамилия" @bind-value="user.Surname" />	
 
 			<input type="email" placeholder="Эл почта" @bind-value="user.Email" />
-			
 
 			<input type="password" placeholder="Пароль" @bind-value="user.Password" />
-			
 
 			<input type="password" placeholder="Повторить пароль" @bind-value = "confirmed_password" />
 			@if(firstError != "")
 			{
 				<p style="font-size:20px;color: red;">@firstError</p>
 			}
-
-			<button type="submit" class="signup_btn" @onclick=Register>зарегистрироваться</button>
+			<button type="submit" class="signup_btn">зарегистрироваться</button>
 			<span>У вас уже есть аккаунт?</span>
 			<button type="button" class="gotosignin_btn" @onclick="Move">войти</button>
 		</EditForm>
-		
 	</form>
 
 </div>
@@ -70,25 +61,47 @@
 	private SignIn userSignIn = new SignIn();
 	private User user = new User();
 	private string firstError = "";
-	private string confirmed_password;
+	private string confirmed_password = "";
+	private string signin_error = "";
 
-	private async Task Register()
+	private string signin_email = "", signin_password = "";
+
+	public async Task enter()
 	{
-		if (confirmed_password == user.Password)
+		if(await UserService.ValidateUserAsync(signin_email,signin_password))
 		{
-			int Process = await UserService.AddUserAsync(user);
-			if (Process == (int)HttpStatusCode.OK)
-			{
-				Navigation.NavigateTo("/");
-			}
+			signin_error = "";
+			Navigation.NavigateTo("/");
+			Console.WriteLine("you enterd succesfully");
 		}
-		else firstError = "passwords doesn't confirm";
-
+		else
+		{
+			signin_error = "Invalid Email Or Password";
+		}
 	}
 
-	private void HandleValidSubmit()
+	private async Task HandleValidSubmit()
 	{
-		Console.WriteLine(JsonSerializer.Serialize(user));
+		firstError = "";
+		if (confirmed_password == user.Password)
+		{
+			if(await UserService.IsEmailExistingAsync(user.Email))
+			{
+				firstError = "email is already existing";
+			}
+			else
+			{
+				int Process = await UserService.AddUserAsync(user);
+				if (Process == (int)HttpStatusCode.OK)
+				{
+					Navigation.NavigateTo("/");
+				}
+			}
+		}
+		else
+		{
+			firstError = "passwords doesn't confirm";
+		}
 	}
 
 	private void HandleValidSubmit_signIn()
@@ -109,12 +122,15 @@
 				firstError = val.ErrorMessage;
 				break;
 			}
+
 		}
 	}
 
 
 	public void Move()
 	{
+		firstError = "";
+		signin_error = "";
 		if (move_px == 570)
 		{
 			move_px = 0;

@@ -41,3 +41,4 @@ C:\Users\matev\desktop\blazor\reg\reg\obj\Debug\net8.0\Reg.csproj.AssemblyRefere
 C:\Users\matev\desktop\blazor\reg\reg\obj\Debug\net8.0\Reg.csproj.Up2Date
 C:\Users\matev\desktop\blazor\reg\reg\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\matev\desktop\blazor\reg\reg\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\matev\desktop\blazor\reg\reg\obj\Debug\net8.0\Reg.sourcelink.json
